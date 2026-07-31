@@ -1,0 +1,85 @@
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/common/Button";
+
+export const Hero = () => {
+  return (
+    <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[160px] pb-0" id="home">
+      
+      {/* Exact ambient glow from reference */}
+      <div className="absolute top-[138px] left-1/2 -translate-x-1/2 w-[403px] h-[444px] bg-[rgba(124,110,250,0.5)] blur-[80px] rounded-full pointer-events-none z-0" />
+
+      <div className="relative z-10 text-center flex flex-col items-center px-4 max-w-4xl mx-auto mt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <div className="flex flex-col items-center gap-6 relative">
+            <span className="text-[#C4C9D6] font-medium text-[15px]">Hello There! 👋</span>
+            
+            {/* Avatar Placeholder: exactly 192px */}
+            <div className="w-[192px] h-[192px] rounded-full overflow-hidden bg-[#1E2540] border border-[#2A3050]">
+              <div className="w-full h-full bg-gradient-to-br from-[#1E2540] to-[#0A0F1E]" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-[52px] font-bold text-white mb-4 tracking-[-2.08px] leading-[1.1em]"
+        >
+          I'm <span className="text-[#7C6EFA]">Lumen Noir</span>
+        </motion.h1>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-[36px] font-semibold text-white mb-8 tracking-[-0.36px] leading-[1.2em]"
+        >
+          Product UI/UX Designer
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-[#94A3B8] text-[16px] mb-10 max-w-[400px] mx-auto leading-relaxed"
+        >
+          I turn complex problems into experiences that feel effortless.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-10"
+        >
+          {/* Badge: exactly 210px x 38px */}
+          <div className="bg-[#7C6EFA]/10 border border-[#7C6EFA]/30 rounded-full h-[38px] w-[210px] flex items-center justify-center mx-auto">
+            <span className="text-[#7C6EFA] text-[16px] font-semibold">2+ Years of Experience</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          <a href="#work" className="bg-transparent border border-white/60 text-white text-[16px] font-normal rounded-full h-[48px] w-[180px] flex items-center justify-center transition-all hover:bg-white/5">
+            View My work
+          </a>
+          <a href="#contact" className="bg-[#5B4FD4] text-white text-[16px] font-normal rounded-full h-[48px] w-[180px] flex items-center justify-center transition-all hover:opacity-90 hover:shadow-[0_4px_20px_rgba(91,79,212,0.4)]">
+            Let's Connect
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
