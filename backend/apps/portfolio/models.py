@@ -5,18 +5,44 @@ class UserProfile(models.Model):
     designation = models.CharField(max_length=150)
     note = models.TextField(blank=True, null=True)
     experience_years = models.IntegerField(default=0)
-    about_me = models.TextField(blank=True, null=True)
+    short_intro = models.TextField(blank=True, null=True, help_text="Short text for the Hero section")
+    about_me = models.TextField(blank=True, null=True, help_text="Detailed text for the About section")
     profile_image = models.ImageField(upload_to='profile/', blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     github_url = models.URLField(blank=True, null=True)
     resume_file = models.FileField(upload_to='resume/', blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
+    services_title = models.CharField(max_length=200, default="My Services")
+    services_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Services section")
+    works_title = models.CharField(max_length=200, default="Selected Projects")
+    works_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Works section")
+    highlights_title = models.CharField(max_length=200, default="Project Highlights")
+    highlights_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Highlights section")
+    tools_title = models.CharField(max_length=200, default="Tools I Work With")
+    tools_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Tools section")
+    process_title = models.CharField(max_length=200, default="My Development Process")
+    process_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Process section")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+class ProcessStep(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    icon_name = models.CharField(max_length=100, default="Layers", help_text="Name of the Lucide React icon (e.g., Search, Layers, Server, Code, Activity)")
+    display_order = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f"{self.step_number} - {self.title}"
 
 class MyService(models.Model):
     title = models.CharField(max_length=200)
@@ -124,3 +150,28 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+class Project(models.Model):
+    HIGHLIGHT_CHOICES = [
+        (0, 'Do Not Highlight'),
+        (1, 'Highlight in Row 1'),
+        (2, 'Highlight in Row 2'),
+    ]
+
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    categories = models.CharField(max_length=255, help_text="Enter categories separated by commas (e.g. 'React, UI/UX, Mobile App')")
+    description = models.TextField(blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='projects/', blank=True, null=True)
+    project_url = models.URLField(blank=True, null=True)
+    highlight_row = models.IntegerField(choices=HIGHLIGHT_CHOICES, default=0, help_text="Select a row to feature this project's thumbnail in the Highlights section.")
+    display_order = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['display_order', '-created_at']
+
+    def __str__(self):
+        return self.title

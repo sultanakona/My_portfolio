@@ -33,17 +33,21 @@ export const Hero = () => {
         >
           <div className="flex flex-col items-center gap-6 relative">
             <span className="text-[#C4C9D6] font-medium text-[15px]">
-              {profile?.note || "Hello There! 👋"}
+              {profile?.note || ""}
             </span>
             
-            {/* Avatar Placeholder: exactly 192px */}
-            <div className="w-[192px] h-[192px] rounded-full overflow-hidden bg-[#1E2540] border border-[#2A3050]">
+            {/* Avatar Container with Floating Animation */}
+            <motion.div
+              animate={{ y: [0, -16, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-[192px] h-[192px] rounded-full overflow-hidden bg-[#1E2540] border border-[#2A3050]"
+            >
               {profile?.profile_image ? (
                 <img src={profile.profile_image} alt={profile.name} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-[#1E2540] to-[#0A0F1E]" />
               )}
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 
@@ -53,7 +57,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-[52px] font-bold text-white mb-4 tracking-[-2.08px] leading-[1.1em]"
         >
-          I'm <span className="text-[#7C6EFA]">{profile?.name || "Lumen Noir"}</span>
+          I'm <span className="text-[#7C6EFA]">{profile?.name || ""}</span>
         </motion.h1>
 
         <motion.h2
@@ -62,7 +66,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-[36px] font-semibold text-white mb-8 tracking-[-0.36px] leading-[1.2em]"
         >
-          {profile?.designation || "Product UI/UX Designer"}
+          {profile?.designation || ""}
         </motion.h2>
 
         <motion.p
@@ -71,7 +75,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-[#94A3B8] text-[16px] mb-10 max-w-[400px] mx-auto leading-relaxed"
         >
-          {profile?.about_me || "I turn complex problems into experiences that feel effortless."}
+          {profile?.short_intro || ""}
         </motion.p>
 
         <motion.div
@@ -83,7 +87,7 @@ export const Hero = () => {
           {/* Badge: exactly 210px x 38px */}
           <div className="bg-[#7C6EFA]/10 border border-[#7C6EFA]/30 rounded-full h-[38px] px-6 flex items-center justify-center mx-auto">
             <span className="text-[#7C6EFA] text-[16px] font-semibold">
-              {profile?.experience_years ? `${profile.experience_years}+ Years of Experience` : "2+ Years of Experience"}
+              {profile?.experience_years ? `${profile.experience_years}+ Years of Experience` : ""}
             </span>
           </div>
         </motion.div>

@@ -1,7 +1,15 @@
-from rest_framework import viewsets, mixins
-from .models import ContactMessage
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from .serializers import ContactMessageSerializer
 
-class ContactMessageViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    queryset = ContactMessage.objects.all()
-    serializer_class = ContactMessageSerializer
+class ContactMessageAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ContactMessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Thank you! Your message has been sent successfully."}, 
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

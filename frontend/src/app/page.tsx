@@ -17,9 +17,9 @@ export default function Home() {
       <Marquee />
       <About />
       <Services />
-      <DesignProcess />
       <DesignHighlights />
       <SelectedWorks />
+      <DesignProcess />
       <Tools />
       <Experience />
       <Contact />
