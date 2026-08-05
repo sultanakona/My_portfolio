@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.db import models
 from unfold.admin import ModelAdmin
+from django_ckeditor_5.widgets import CKEditor5Widget
 from .models import UserProfile, MyService, Education, Experience, SkillCategory, Skill, Project, ProcessStep
 
 @admin.register(UserProfile)
@@ -13,18 +15,27 @@ class MyServiceAdmin(ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('is_active', 'is_featured')
     search_fields = ('title', 'short_title')
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='default')},
+    }
 
 @admin.register(Education)
 class EducationAdmin(ModelAdmin):
     list_display = ('degree', 'institution_name', 'start_date', 'end_date', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('degree', 'institution_name')
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='default')},
+    }
 
 @admin.register(Experience)
 class ExperienceAdmin(ModelAdmin):
     list_display = ('title', 'company_name', 'start_date', 'end_date', 'is_current', 'is_active')
     list_filter = ('is_current', 'is_active', 'is_featured')
     search_fields = ('title', 'company_name')
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='default')},
+    }
 
 @admin.register(SkillCategory)
 class SkillCategoryAdmin(ModelAdmin):

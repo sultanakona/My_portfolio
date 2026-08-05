@@ -42,7 +42,7 @@ class ProcessStep(models.Model):
         ordering = ['display_order']
 
     def __str__(self):
-        return f"{self.step_number} - {self.title}"
+        return f"{self.display_order} - {self.title}"
 
 class MyService(models.Model):
     title = models.CharField(max_length=200)
@@ -75,7 +75,6 @@ class Education(models.Model):
     end_date = models.DateField(blank=True, null=True)
     cgpa = models.CharField(max_length=50, blank=True, null=True)
     achievement = models.TextField(blank=True, null=True)
-    cv_file = models.FileField(upload_to='education_cv/', blank=True, null=True)
     display_order = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -90,16 +89,11 @@ class Education(models.Model):
 class Experience(models.Model):
     title = models.CharField(max_length=200)
     company_name = models.CharField(max_length=200)
-    company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)
-    employment_type = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
-    location_type = models.CharField(max_length=100, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     is_current = models.BooleanField(default=False)
-    short_description = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    highlight_color = models.CharField(max_length=50, blank=True, null=True)
     display_order = models.IntegerField(default=0)
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
