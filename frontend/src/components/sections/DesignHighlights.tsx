@@ -70,25 +70,25 @@ export const DesignHighlights = () => {
     const content = (
       <>
         {isDynamic && item.thumbnail ? (
-          <img src={item.thumbnail} alt={item.title || "Project Mockup"} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <img src={item.thumbnail} alt={item.title || "Project Mockup"} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110" />
         ) : (
-          <div className={`w-full h-full ${!isDynamic ? item : 'bg-[#1E2540]'} flex items-center justify-center transition-transform duration-500 group-hover:scale-105`}>
+          <div className={`w-full h-full ${!isDynamic ? item : 'bg-[#1E2540]'} flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-active:scale-105`}>
             <span className="text-white/20 font-semibold tracking-widest uppercase">Project Mockup</span>
           </div>
         )}
         
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-[#0A0F1E]/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm">
+        <div className="absolute inset-0 bg-[#0A0F1E]/90 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm">
           {isDynamic && item.title && (
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{item.title}</h3>
+            <h3 className="text-white font-bold text-xl md:text-2xl mb-2 translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-500">{item.title}</h3>
           )}
           {isDynamic && item.categories && (
-            <p className="text-[#00C9A7] text-sm md:text-base font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75 mb-4">
+            <p className="text-[#00C9A7] text-sm md:text-base font-medium translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-500 delay-75 mb-4">
               {item.categories.split(',').join(' • ')}
             </p>
           )}
           {isDynamic && item.project_url && (
-            <span className="inline-flex items-center text-[#7C6EFA] text-sm font-semibold gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+            <span className="inline-flex items-center text-[#7C6EFA] text-sm font-semibold gap-2 translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-500 delay-100">
               View Case Study <span className="text-lg">→</span>
             </span>
           )}

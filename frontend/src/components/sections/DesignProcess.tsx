@@ -75,15 +75,15 @@ export const DesignProcess = () => {
               key={process.id || idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px" }}
               transition={{ delay: idx * 0.15, duration: 0.6 }}
               className="relative w-[260px] h-[320px] group cursor-pointer"
             >
               {/* Stacked Back Card */}
-              <div className="absolute w-[264px] h-[324px] bg-[#1E2540] border border-[#2A3050] rounded-[14px] top-4 left-4 transition-all duration-300 ease-out group-hover:top-2 group-hover:-rotate-6" />
+              <div className="absolute w-[264px] h-[324px] bg-[#1E2540] border border-[#2A3050] rounded-[14px] top-4 left-4 transition-all duration-300 ease-out group-hover:top-2 group-hover:-rotate-6 group-active:top-2 group-active:-rotate-6" />
 
               {/* Main Front Card */}
-              <div className="absolute w-[260px] h-[320px] bg-[#131929] border border-[#2A3050] rounded-[14px] top-0 left-0 transition-all duration-300 ease-out group-hover:top-5 group-hover:rotate-[6deg] flex flex-col items-center pt-8 px-6 pb-6 text-center z-10 shadow-2xl shadow-black/40">
+              <div className="absolute w-[260px] h-[320px] bg-[#131929] border border-[#2A3050] rounded-[14px] top-0 left-0 transition-all duration-300 ease-out group-hover:top-5 group-hover:rotate-[6deg] group-active:top-5 group-active:rotate-[6deg] flex flex-col items-center pt-8 px-6 pb-6 text-center z-10 shadow-2xl shadow-black/40">
                 
                 {/* Icon Box */}
                 <div className="w-[48px] h-[48px] bg-[#1E2540] border border-[#2A3050] rounded-[8px] flex items-center justify-center mb-6">

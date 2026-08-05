@@ -19,9 +19,9 @@ export default function Home() {
       <Services />
       <DesignHighlights />
       <SelectedWorks />
+      <Experience />
       <DesignProcess />
       <Tools />
-      <Experience />
       <Contact />
       <Footer />
     </div>

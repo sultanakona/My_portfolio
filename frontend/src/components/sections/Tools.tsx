@@ -63,13 +63,13 @@ export const Tools = () => {
               key={tool.name || idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px" }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="w-full h-[180px] bg-[#131929] border border-[#2A3050] rounded-[14px] flex items-center justify-center group cursor-pointer transition-all duration-300 hover:shadow-[0px_4px_20px_0px_rgba(91,79,212,0.4)] hover:border-[#5B4FD4]/50"
+              className="w-full h-[180px] bg-[#131929] border border-[#2A3050] rounded-[14px] flex items-center justify-center group cursor-pointer transition-all duration-300 hover:shadow-[0px_4px_20px_0px_rgba(91,79,212,0.4)] hover:border-[#5B4FD4]/50 active:shadow-[0px_4px_20px_0px_rgba(91,79,212,0.4)] active:border-[#5B4FD4]/50 active:scale-[0.98]"
               style={{ '--hover-color': tool.color } as any}
               onClick={() => tool.official_url && window.open(tool.official_url, "_blank")}
             >
-              <div className="flex flex-col items-center gap-[20px] transition-transform duration-300 group-hover:scale-[1.04]">
+              <div className="flex flex-col items-center gap-[20px] transition-transform duration-300 group-hover:scale-[1.04] group-active:scale-[1.04]">
                 <div 
                   className="w-[64px] h-[64px] rounded-[14px] flex items-center justify-center"
                   style={bgIconStyle}
