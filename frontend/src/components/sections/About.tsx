@@ -8,7 +8,7 @@ export const About = () => {
   const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     fetch(`${apiUrl}/portfolio/profile/`)
       .then((res) => res.json())
       .then((data) => {
@@ -16,18 +16,19 @@ export const About = () => {
           setProfile(data[0]);
         }
       })
-      .catch((err) => console.error("Error fetching profile:", err));
+      .catch((err) => console.error("Error fetching profile in About:", err));
   }, []);
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 md:px-12 w-full" id="about">
-      <div className="w-full max-w-[1100px] mx-auto py-24">
+    <section className="py-16 md:py-24 px-6 md:px-12 w-full flex justify-center scroll-mt-20" id="about">
+      <div className="w-full max-w-[1100px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left Side: Text */}
         <div>
           <SectionTitle>About <span className="text-white">Me</span></SectionTitle>
           <div className="space-y-6 text-[#94A3B8] mt-8 leading-[1.8] text-[15px] whitespace-pre-line">
             <p>
-              {profile?.about_me || ""}
+              {profile?.about_me || "Passionate about creating meaningful digital experiences through thoughtful design and problem-solving. Focused on crafting intuitive interfaces that balance usability, aesthetics, and business goals."}
             </p>
           </div>
         </div>
@@ -58,15 +59,49 @@ export const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-            whileHover={{ scale: 1.05 }}
-            className="absolute bottom-0 left-0 bg-[#5B4FD4] rounded-[14px] w-[60%] h-[23%] flex flex-col justify-center px-5 z-20 cursor-default"
+            whileHover={{ scale: 1.03 }}
+            className="absolute bottom-0 left-0 bg-[#5B4FD4] rounded-[14px] w-[70%] h-auto py-3.5 flex flex-col justify-center px-5 z-20 cursor-default shadow-xl"
           >
-            <div className="flex gap-2 mb-2">
-              <span className="p-1.5 bg-white/20 rounded-md flex items-center justify-center"><MapPin className="w-3.5 h-3.5 text-white" /></span>
-              <a href={profile?.linkedin_url || "#"} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-white/20 hover:bg-white/30 rounded-md text-[11px] font-bold text-white flex items-center justify-center underline underline-offset-2 transition-all">LinkedIn</a>
-              <a href={profile?.github_url || "#"} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-white/20 hover:bg-white/30 rounded-md text-[11px] font-bold text-white flex items-center justify-center underline underline-offset-2 transition-all">GitHub</a>
+            <div className="flex items-center gap-2 mb-2 relative z-30">
+              <span className="p-1.5 bg-white/20 rounded-md flex items-center justify-center cursor-default" title={profile?.location || "Location"}>
+                <MapPin className="w-3.5 h-3.5 text-white" />
+              </span>
+              
+              {profile?.github_url ? (
+                <a 
+                  href={profile.github_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-white/20 hover:bg-white/40 rounded-md text-[11px] font-bold text-white flex items-center justify-center transition-all cursor-pointer underline"
+                  title="Open GitHub Profile"
+                >
+                  GitHub
+                </a>
+              ) : (
+                <span className="px-2.5 py-1 bg-white/20 rounded-md text-[11px] font-bold text-white/80 flex items-center justify-center">
+                  GitHub
+                </span>
+              )}
+
+              {profile?.linkedin_url ? (
+                <a 
+                  href={profile.linkedin_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-white/20 hover:bg-white/40 rounded-md text-[11px] font-bold text-white flex items-center justify-center transition-all cursor-pointer underline"
+                  title="Open LinkedIn Profile"
+                >
+                  LinkedIn
+                </a>
+              ) : (
+                <span className="px-2.5 py-1 bg-white/20 rounded-md text-[11px] font-bold text-white/80 flex items-center justify-center">
+                  LinkedIn
+                </span>
+              )}
             </div>
-            <p className="text-white text-[14px] font-semibold leading-snug">{profile?.location || ""}</p>
+            <p className="text-white text-[14px] font-semibold leading-snug">
+              {profile?.location ? `Based in ${profile.location}` : "Working globally"}
+            </p>
             <p className="text-white/80 text-[12px] mt-1">{profile?.designation || ""}</p>
           </motion.div>
         </motion.div>
@@ -75,3 +110,4 @@ export const About = () => {
     </section>
   );
 };
+

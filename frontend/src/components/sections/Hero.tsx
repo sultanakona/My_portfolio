@@ -6,25 +6,27 @@ export const Hero = () => {
   const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
-    // Fetch data using Environment Variable
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     fetch(`${apiUrl}/portfolio/profile/`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.length > 0) {
-          setProfile(data[0]); // Usually only one profile is active
+          setProfile(data[0]);
         }
       })
       .catch((err) => console.error("Error fetching profile:", err));
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[160px] pb-0" id="home">
+    <section 
+      className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[105px] pb-16 md:pb-24" 
+      id="home"
+    >
       
-      {/* Exact ambient glow from reference */}
-      <div className="absolute top-[138px] left-1/2 -translate-x-1/2 w-[403px] h-[444px] bg-[rgba(124,110,250,0.5)] blur-[80px] rounded-full pointer-events-none z-0" />
+      {/* Exact ambient glow from reference (Fixed static) */}
+      <div className="absolute top-[100px] left-1/2 -translate-x-1/2 w-[403px] h-[444px] bg-[rgba(124,110,250,0.5)] blur-[80px] rounded-full pointer-events-none z-0" />
 
-      <div className="relative z-10 text-center flex flex-col items-center px-4 max-w-4xl mx-auto mt-4">
+      <div className="relative z-10 text-center flex flex-col items-center px-4 max-w-4xl mx-auto mt-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,15 +34,30 @@ export const Hero = () => {
           className="mb-8"
         >
           <div className="flex flex-col items-center gap-6 relative">
-            <span className="text-[#C4C9D6] font-medium text-[15px]">
-              {profile?.note || ""}
+            {/* Fast Animated Greeting with Waving Hand */}
+            <span className="text-[#C4C9D6] font-medium text-[15px] flex items-center gap-1.5">
+              {profile?.note || "Hello There!"}
+              <motion.span
+                animate={{ rotate: [0, 25, -15, 25, 0] }}
+                transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 0.5 }}
+                className="inline-block origin-bottom-right"
+              >
+                👋
+              </motion.span>
             </span>
             
-            {/* Avatar Container with Floating Animation */}
+            {/* Floating Avatar Container */}
             <motion.div
-              animate={{ y: [0, -16, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-[192px] h-[192px] rounded-full overflow-hidden bg-[#1E2540] border border-[#2A3050]"
+              animate={{
+                y: [0, -18, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              whileHover={{ scale: 1.05 }}
+              className="w-[192px] h-[192px] rounded-full overflow-hidden bg-[#1E2540] border-2 border-[#2A3050] shadow-[0_10px_30px_rgba(124,110,250,0.3)] hover:border-[#7C6EFA] transition-all cursor-pointer"
             >
               {profile?.profile_image ? (
                 <img src={profile.profile_image} alt={profile.name} className="w-full h-full object-cover" />
@@ -75,7 +92,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-[#94A3B8] text-[16px] mb-10 max-w-[400px] mx-auto leading-relaxed"
         >
-          {profile?.short_intro || ""}
+          {profile?.hero_tagline || profile?.short_intro || "I turn complex problems into experiences that feel effortless."}
         </motion.p>
 
         <motion.div
@@ -109,3 +126,5 @@ export const Hero = () => {
     </section>
   );
 };
+
+

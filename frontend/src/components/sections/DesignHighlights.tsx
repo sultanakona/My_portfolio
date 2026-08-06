@@ -24,7 +24,7 @@ export const DesignHighlights = () => {
   const [highlightsRow2, setHighlightsRow2] = useState<any[]>([]);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     fetch(`${apiUrl}/portfolio/profile/`)
       .then((res) => res.json())
       .then((data) => {
@@ -129,7 +129,7 @@ export const DesignHighlights = () => {
   const displayRow2 = getPaddedItems(highlightsRow2, defaultMockupsRow2);
 
   return (
-    <section className="min-h-screen flex flex-col justify-center overflow-hidden w-full pt-[100px]" id="highlights">
+    <section className="py-16 md:py-24 flex flex-col justify-center overflow-hidden w-full scroll-mt-20" id="highlights">
       <div className="text-center mb-16 px-6 max-w-4xl mx-auto">
         <SectionTitle><span className="text-[#7C6EFA]">{highlightWord}</span> <span className="text-white">{normalWords}</span></SectionTitle>
         <Subtitle className="mx-auto mt-4 text-[#94A3B8]">

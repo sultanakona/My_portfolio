@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,30 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+    fetch(`${apiUrl}/portfolio/profile/`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          setProfile(data[0]);
+        }
+      })
+      .catch((err) => console.error("Error fetching profile in Navbar:", err));
+  }, []);
+
+  // Format dynamic full name from profile for Brand Logo
+  const getBrandLogo = () => {
+    if (!profile?.name) return <>Sultana <span className="text-[#7C6EFA] font-light">Kona</span></>;
+    const nameParts = profile.name.trim().split(" ");
+    if (nameParts.length > 1) {
+      const lastWord = nameParts.pop();
+      const restName = nameParts.join(" ");
+      return <>{restName} <span className="text-[#7C6EFA] font-light">{lastWord}</span></>;
+    }
+    return <>{profile.name}</>;
+  };
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -39,8 +64,8 @@ export const Navbar = () => {
         }`}
       >
         <div className="flex items-center justify-between w-full">
-          <Link href="/" className="text-[20px] lg:text-[28px] font-bold italic tracking-wider text-white font-serif flex-shrink-0">
-            Your<span className="text-[#7C6EFA] font-light">Brand</span>Logo
+          <Link href="/" className="text-[20px] lg:text-[26px] font-bold italic tracking-wider text-white font-serif flex-shrink-0 capitalize">
+            {getBrandLogo()}
           </Link>
 
           {/* Desktop Menu */}

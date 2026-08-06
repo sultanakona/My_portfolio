@@ -9,7 +9,7 @@ export const Tools = () => {
   const [skills, setSkills] = useState<any[]>([]);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     fetch(`${apiUrl}/portfolio/profile/`)
       .then((res) => res.json())
       .then((data) => {

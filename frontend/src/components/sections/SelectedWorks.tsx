@@ -10,7 +10,7 @@ export const SelectedWorks = () => {
   const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     
     // Fetch projects
     fetch(`${apiUrl}/portfolio/projects/`)

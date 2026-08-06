@@ -6,8 +6,35 @@ from .models import UserProfile, MyService, Education, Experience, SkillCategory
 
 @admin.register(UserProfile)
 class UserProfileAdmin(ModelAdmin):
-    list_display = ('name', 'designation', 'email', 'experience_years')
+    list_display = ('name', 'designation', 'email', 'location', 'experience_years')
     search_fields = ('name', 'designation', 'email')
+    
+    fieldsets = (
+        ("👤 Personal & Basic Information", {
+            "fields": ("name", "designation", "location", "email", "profile_image", "resume_file"),
+        }),
+        ("✨ Hero Section Content", {
+            "fields": ("note", "hero_tagline", "short_intro", "experience_years"),
+        }),
+        ("📝 About Me Section", {
+            "fields": ("about_me",),
+        }),
+        ("🔗 Social Links", {
+            "fields": ("github_url", "linkedin_url"),
+        }),
+        ("📌 Section Titles & Subtitles", {
+            "fields": (
+                "services_title", "services_subtitle",
+                "works_title", "works_subtitle",
+                "highlights_title", "highlights_subtitle",
+                "tools_title", "tools_subtitle",
+                "process_title", "process_subtitle",
+            ),
+        }),
+        ("✉️ Contact Section Content", {
+            "fields": ("contact_title", "contact_subtitle", "contact_heading", "contact_description"),
+        }),
+    )
 
 @admin.register(MyService)
 class MyServiceAdmin(ModelAdmin):

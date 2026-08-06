@@ -9,7 +9,7 @@ export const Services = () => {
   const [services, setServices] = useState<any[]>([]);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     
     // Fetch Profile for titles
     fetch(`${apiUrl}/portfolio/profile/`)
@@ -47,8 +47,8 @@ export const Services = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 w-full" id="services">
-      <div className="w-full max-w-[1300px] mx-auto py-24">
+    <section className="py-16 md:py-24 px-6 md:px-12 w-full flex justify-center scroll-mt-20" id="services">
+      <div className="w-full max-w-[1300px] mx-auto">
       <div className="text-center mb-16">
         <SectionTitle>
           {normalWords} <span className="text-[#7C6EFA]">{highlightWord}</span>

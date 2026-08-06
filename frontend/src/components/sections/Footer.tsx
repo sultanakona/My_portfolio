@@ -1,9 +1,34 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Globe, Mail } from "lucide-react";
 
 export const Footer = () => {
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+    fetch(`${apiUrl}/portfolio/profile/`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          setProfile(data[0]);
+        }
+      })
+      .catch((err) => console.error("Error fetching profile in Footer:", err));
+  }, []);
+
+  const getBrandLogo = () => {
+    if (!profile?.name) return <>Sultana <span className="text-[#7C6EFA] font-light">Kona</span></>;
+    const nameParts = profile.name.trim().split(" ");
+    if (nameParts.length > 1) {
+      const lastWord = nameParts.pop();
+      const restName = nameParts.join(" ");
+      return <>{restName} <span className="text-[#7C6EFA] font-light">{lastWord}</span></>;
+    }
+    return <>{profile.name}</>;
+  };
+
   return (
     <footer className="w-full bg-[#0A0F1E] flex flex-col pt-16 border-t border-[#2A3050]">
       <div className="w-full max-w-6xl mx-auto px-6 lg:px-10 pb-16">
@@ -11,10 +36,10 @@ export const Footer = () => {
           
           {/* Brand Col */}
           <div className="flex flex-col gap-[12px] w-[280px] shrink-0">
-            <Link href="/" className="text-[26px] font-bold italic tracking-wider text-white font-serif">
-              Your<span className="text-[#7C6EFA] font-light">Brand</span>Logo
+            <Link href="/" className="text-[26px] font-bold italic tracking-wider text-white font-serif capitalize">
+              {getBrandLogo()}
             </Link>
-            <h4 className="text-white text-[13px] font-semibold mt-1">UI/UX Designer & Framer Developer</h4>
+            <h4 className="text-white text-[13px] font-semibold mt-1">{profile?.designation || "Backend Developer"}</h4>
             <p className="text-[#94A3B8] text-[13px] leading-relaxed">
               I design and build digital experiences that are intuitive, functional and delightful to use.
             </p>
@@ -73,7 +98,7 @@ export const Footer = () => {
       <div className="w-full bg-[#2A3050] py-4 px-6">
         <div className="flex flex-row items-center justify-center gap-5 flex-wrap">
           <p className="text-[#C4C9D6] text-[12px] font-semibold">
-            © 2026 Your Name. All rights reserved.
+            © {new Date().getFullYear()} {profile?.name || "Sultana Kona"}. All rights reserved.
           </p>
           <span className="text-[#C4C9D6] text-[12px] font-semibold">⭐ Designed & Built with 🤍 using Next.js</span>
           <span className="text-[#C4C9D6] text-[12px] font-semibold">⭐ Always learning. Always creating.</span>

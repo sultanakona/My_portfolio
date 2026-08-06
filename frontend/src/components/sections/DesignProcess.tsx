@@ -9,7 +9,7 @@ export const DesignProcess = () => {
   const [steps, setSteps] = useState<any[]>([]);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     fetch(`${apiUrl}/portfolio/profile/`)
       .then((res) => res.json())
       .then((data) => {
@@ -58,8 +58,8 @@ export const DesignProcess = () => {
   const displaySteps = steps.length > 0 ? steps : defaultProcesses;
 
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 w-full" id="process">
-      <div className="w-full max-w-[1200px] mx-auto py-24">
+    <section className="py-16 md:py-24 px-6 md:px-12 w-full flex justify-center scroll-mt-20" id="process">
+      <div className="w-full max-w-[1200px] mx-auto">
       <div className="text-center mb-20">
         <SectionTitle>{normalWords} <span className="text-[#7C6EFA]">{highlightWord}</span></SectionTitle>
         <Subtitle className="mx-auto mt-4 text-[#94A3B8]">

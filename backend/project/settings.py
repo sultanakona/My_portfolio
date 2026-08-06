@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'), override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -133,7 +138,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media files
-import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -189,3 +193,17 @@ CKEDITOR_5_CONFIGS = {
 }
 CKEDITOR_5_UPLOAD_FILE_VIEW_NAME = 'ck_editor_5_upload_file'
 CKEDITOR_5_CUSTOM_CSS = 'css/ckeditor_custom.css'
+
+# Email SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'sultanakona259@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'sultanakona259@gmail.com')
+
+# Django Unfold Customization
+from .unfold_config import UNFOLD
+

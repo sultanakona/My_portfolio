@@ -9,7 +9,7 @@ export const Experience = () => {
   const [educations, setEducations] = useState<any[]>([]);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
     
     // Fetch Profile
     fetch(`${apiUrl}/portfolio/profile/`)
@@ -54,7 +54,7 @@ export const Experience = () => {
   };
 
   return (
-    <section className="pt-[100px] pb-[60px] px-6 md:px-12 w-full flex justify-center" id="resume">
+    <section className="pt-[100px] pb-[60px] px-6 md:px-12 w-full flex justify-center" id="experience">
       <div className="w-full max-w-[1200px] mx-auto">
       {/* Top Title */}
       <div className="text-center mb-24">
@@ -170,7 +170,8 @@ export const Experience = () => {
       {/* Resume Button */}
       {profile?.resume_file && (
         <motion.div 
-          className="flex justify-center mt-12"
+          id="resume"
+          className="flex justify-center mt-12 scroll-mt-[40vh]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

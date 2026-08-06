@@ -4,6 +4,7 @@ class UserProfile(models.Model):
     name = models.CharField(max_length=150)
     designation = models.CharField(max_length=150)
     note = models.TextField(blank=True, null=True)
+    hero_tagline = models.CharField(max_length=255, blank=True, null=True, help_text="Short tagline for Hero section")
     experience_years = models.IntegerField(default=0)
     short_intro = models.TextField(blank=True, null=True, help_text="Short text for the Hero section")
     about_me = models.TextField(blank=True, null=True, help_text="Detailed text for the About section")
@@ -23,8 +24,16 @@ class UserProfile(models.Model):
     tools_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Tools section")
     process_title = models.CharField(max_length=200, default="My Development Process")
     process_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Process section")
+    contact_title = models.CharField(max_length=200, default="Get In Touch")
+    contact_subtitle = models.TextField(blank=True, null=True, help_text="Subtitle for the Contact section")
+    contact_heading = models.CharField(max_length=255, default="Let's create something extraordinary")
+    contact_description = models.TextField(blank=True, null=True, help_text="Description for the Contact section card")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "User Profile"
+        verbose_name_plural = "User Profiles"
 
     def __str__(self):
         return self.name
@@ -40,6 +49,8 @@ class ProcessStep(models.Model):
 
     class Meta:
         ordering = ['display_order']
+        verbose_name = "Process Step"
+        verbose_name_plural = "Process Steps"
 
     def __str__(self):
         return f"{self.display_order} - {self.title}"
@@ -64,6 +75,8 @@ class MyService(models.Model):
 
     class Meta:
         ordering = ['display_order']
+        verbose_name = "Service"
+        verbose_name_plural = "Services"
 
     def __str__(self):
         return self.title
@@ -82,6 +95,8 @@ class Education(models.Model):
 
     class Meta:
         ordering = ['display_order', '-start_date']
+        verbose_name = "Education Record"
+        verbose_name_plural = "Education Records"
 
     def __str__(self):
         return f"{self.degree} at {self.institution_name}"
@@ -102,6 +117,8 @@ class Experience(models.Model):
 
     class Meta:
         ordering = ['display_order', '-start_date']
+        verbose_name = "Work Experience"
+        verbose_name_plural = "Work Experience Records"
 
     def __str__(self):
         return f"{self.title} at {self.company_name}"
@@ -118,6 +135,8 @@ class SkillCategory(models.Model):
 
     class Meta:
         ordering = ['display_order']
+        verbose_name = "Skill Category"
+        verbose_name_plural = "Skill Categories"
 
     def __str__(self):
         return self.name
@@ -141,6 +160,8 @@ class Skill(models.Model):
 
     class Meta:
         ordering = ['category', 'display_order']
+        verbose_name = "Skill"
+        verbose_name_plural = "Skills & Tech Stack"
 
     def __str__(self):
         return self.name
@@ -166,6 +187,8 @@ class Project(models.Model):
 
     class Meta:
         ordering = ['display_order', '-created_at']
+        verbose_name = "Project"
+        verbose_name_plural = "Projects"
 
     def __str__(self):
         return self.title
