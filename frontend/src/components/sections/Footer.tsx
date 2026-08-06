@@ -127,13 +127,22 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="w-full bg-[#2A3050] py-4 px-6">
-        <div className="flex flex-row items-center justify-center gap-5 flex-wrap">
-          <p className="text-[#C4C9D6] text-[12px] font-semibold">
-            © {new Date().getFullYear()} {profile?.name || "Sultana Kona"}. All rights reserved.
+      <div className="w-full bg-[#131929] py-5 px-6 border-t border-[#2A3050]/80">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[#94A3B8] text-[13px] font-medium">
+          <p>
+            © {new Date().getFullYear()}{" "}
+            <span className="text-white font-semibold capitalize">
+              {profile?.name || "Sultana Parvin Kona"}
+            </span>
+            . All rights reserved.
           </p>
-          <span className="text-[#C4C9D6] text-[12px] font-semibold">⭐ Designed & Built with 🤍 using Next.js</span>
-          <span className="text-[#C4C9D6] text-[12px] font-semibold">⭐ Always learning. Always creating.</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 text-white/80">
+            <span>Crafted with</span>
+            <span className="text-[#7C6EFA]">❤</span>
+            <span>using Django & Next.js</span>
+            <span className="hidden sm:inline mx-1 text-white/20">|</span>
+            <span className="text-[#7C6EFA] font-semibold">Architecting Scalable Backend Solutions 🚀</span>
+          </div>
         </div>
       </div>
     </footer>
