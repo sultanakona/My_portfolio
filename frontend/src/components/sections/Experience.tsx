@@ -54,7 +54,7 @@ export const Experience = () => {
   };
 
   return (
-    <section className="pt-[100px] pb-[60px] px-6 md:px-12 w-full flex justify-center" id="experience">
+    <section className="py-16 md:py-24 px-6 md:px-12 w-full flex justify-center scroll-mt-20" id="resume">
       <div className="w-full max-w-[1200px] mx-auto">
       {/* Top Title */}
       <div className="text-center mb-24">
@@ -168,27 +168,24 @@ export const Experience = () => {
       </div>
 
       {/* Resume Button */}
-      {profile?.resume_file && (
-        <motion.div 
-          id="resume"
-          className="flex justify-center mt-12 scroll-mt-[40vh]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+      <motion.div 
+        className="flex justify-center mt-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <a 
+          href={profile?.resume_file || "#contact"} 
+          target={profile?.resume_file ? "_blank" : "_self"}
+          rel="noopener noreferrer"
+          className="group relative px-8 py-3.5 bg-transparent border-2 border-[#5B4FD4] rounded-full overflow-hidden flex items-center gap-3 transition-all duration-300 hover:shadow-[0_0_20px_rgba(91,79,212,0.4)] cursor-pointer"
         >
-          <a 
-            href={profile.resume_file} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="group relative px-8 py-3.5 bg-transparent border-2 border-[#5B4FD4] rounded-full overflow-hidden flex items-center gap-3 transition-all duration-300 hover:shadow-[0_0_20px_rgba(91,79,212,0.4)]"
-          >
-            <div className="absolute inset-0 bg-[#5B4FD4] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-            <span className="relative z-10 text-[15px] font-semibold text-white">View My Resume</span>
-            <Download className="w-4 h-4 text-white relative z-10 group-hover:animate-bounce" />
-          </a>
-        </motion.div>
-      )}
+          <div className="absolute inset-0 bg-[#5B4FD4] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+          <span className="relative z-10 text-[15px] font-semibold text-white">View My Resume</span>
+          <Download className="w-4 h-4 text-white relative z-10 group-hover:animate-bounce" />
+        </a>
+      </motion.div>
 
       </div>
     </section>

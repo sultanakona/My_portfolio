@@ -53,14 +53,14 @@ export const Navbar = () => {
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-4 lg:top-6 inset-x-0 z-50 flex justify-center px-4 md:px-8 pointer-events-none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="fixed top-4 sm:top-5 lg:top-6 inset-x-0 z-50 flex justify-center px-4 md:px-8 pointer-events-none"
     >
       <nav
-        className={`w-full max-w-[1200px] pointer-events-auto flex flex-col px-5 py-4 lg:px-10 lg:py-5 rounded-[30px] lg:rounded-full transition-all duration-300 border border-white/10 backdrop-blur-[20px] shadow-[inset_0px_0px_40px_rgba(124,110,250,0.15),0px_8px_32px_rgba(0,0,0,0.3)] ${
-          scrolled || isOpen ? "bg-[#131929]/90" : "bg-[#131929]/50"
+        className={`w-full max-w-[1200px] pointer-events-auto flex flex-col px-4 py-3 sm:px-5 sm:py-4 lg:px-10 lg:py-5 rounded-[24px] sm:rounded-[30px] lg:rounded-full transition-all duration-300 border border-white/10 backdrop-blur-[20px] shadow-[inset_0px_0px_40px_rgba(124,110,250,0.15),0px_8px_32px_rgba(0,0,0,0.3)] ${
+          scrolled || isOpen ? "bg-[#131929]/95" : "bg-[#131929]/70"
         }`}
       >
         <div className="flex items-center justify-between w-full">

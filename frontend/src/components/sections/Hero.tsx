@@ -19,7 +19,7 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[105px] pb-16 md:pb-24" 
+      className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[115px] sm:pt-[125px] pb-16 md:pb-24" 
       id="home"
     >
       
@@ -72,18 +72,18 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[52px] font-bold text-white mb-4 tracking-[-2.08px] leading-[1.1em]"
+          className="text-[36px] sm:text-[48px] md:text-[56px] font-bold text-white mb-4 tracking-tight leading-[1.15] capitalize"
         >
-          I'm <span className="text-[#7C6EFA]">{profile?.name || ""}</span>
+          I'm <span className="text-[#7C6EFA]">{profile?.name || "Sultana Parvin Kona"}</span>
         </motion.h1>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-[36px] font-semibold text-white mb-8 tracking-[-0.36px] leading-[1.2em]"
+          className="text-[22px] sm:text-[28px] md:text-[36px] font-semibold text-white/90 mb-6 flex flex-wrap items-center justify-center gap-2"
         >
-          {profile?.designation || ""}
+          {profile?.designation || "Backend Developer | AI Engineer"}
         </motion.h2>
 
         <motion.p
