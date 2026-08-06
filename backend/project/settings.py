@@ -49,9 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Third party apps
+    'cloudinary_storage',
     'django_ckeditor_5',
     'rest_framework',
     'corsheaders',
+    'cloudinary',
     
     # Local apps
     'apps.portfolio',
@@ -161,6 +163,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Cloudinary Storage for Production
+if os.getenv('CLOUDINARY_URL'):
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True  # Allows Vercel frontend to communicate with Render backend
