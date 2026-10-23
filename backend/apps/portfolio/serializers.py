@@ -2,9 +2,19 @@ from rest_framework import serializers
 from .models import UserProfile, MyService, Education, Experience, SkillCategory, Skill, Project, ProcessStep
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    resume_file = serializers.SerializerMethodField()
+
     class Meta:
         model = UserProfile
         fields = '__all__'
+
+    def get_resume_file(self, obj):
+        if not obj.resume_file:
+            return None
+        url = obj.resume_file.url
+        if url and 'cloudinary.com' in url and not url.lower().endswith('.pdf'):
+            url = f"{url}.pdf"
+        return url
 
 class MyServiceSerializer(serializers.ModelSerializer):
     class Meta:
