@@ -1,3 +1,4 @@
+import os
 import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -29,13 +30,33 @@ class ContactMessageAPIView(APIView):
                     f"---\nSent via Portfolio Contact Form"
                 )
 
-                send_mail(
-                    subject=subject,
-                    message=message_body,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[admin_email],
-                    fail_silently=False,
-                )
+                resend_api_key = os.getenv('RESEND_API_KEY')
+                if resend_api_key:
+                    import json
+                    import urllib.request
+                    req = urllib.request.Request(
+                        'https://api.resend.com/emails',
+                        headers={
+                            'Authorization': f'Bearer {resend_api_key}',
+                            'Content-Type': 'application/json',
+                        },
+                        data=json.dumps({
+                            'from': 'Portfolio <onboarding@resend.dev>',
+                            'to': [admin_email],
+                            'subject': subject,
+                            'text': message_body,
+                        }).encode('utf-8')
+                    )
+                    urllib.request.urlopen(req, timeout=10)
+                    logger.info("Email notification sent successfully via Resend API")
+                else:
+                    send_mail(
+                        subject=subject,
+                        message=message_body,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[admin_email],
+                        fail_silently=False,
+                    )
             except Exception as e:
                 print(f"Email sending error: {e}")
                 logger.error(f"Failed to send email notification: {e}")
