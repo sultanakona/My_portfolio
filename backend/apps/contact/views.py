@@ -39,6 +39,7 @@ class ContactMessageAPIView(APIView):
                         headers={
                             'Authorization': f'Bearer {resend_api_key}',
                             'Content-Type': 'application/json',
+                            'User-Agent': 'ResendClient/1.0',
                         },
                         data=json.dumps({
                             'from': 'Portfolio <onboarding@resend.dev>',
